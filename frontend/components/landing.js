@@ -4,6 +4,8 @@ import Navbar from './navbar'
 import GoogleLogin from 'react-google-login'
 import { GoogleLogout } from 'react-google-login';
 import firebase from '../util/firebaseConfig'
+import Onboarding from 'react-onboarding-pro';
+import "react-onboarding-pro/build/index.css";
 
 export default function Landing(props) {
 
@@ -83,6 +85,18 @@ export default function Landing(props) {
     }
   }
 
+  // Config for the onboarding flow
+const config = {
+  steps: [
+    {
+      title: 'Welcome to BrunoBeyond',
+      description: 'Let\'s get you signed up.'
+    },
+  ],
+  overlayClose: false // Should enable closing the popup when the overlay is clicked
+};
+
+
   checkLoginStatus()
   return (<div className="h-full w-screen grid grid-rows-5">
     <Navbar isLanding={true} />
@@ -93,6 +107,10 @@ export default function Landing(props) {
       <div id='google-oauth' className="inline grid items-center">
       {!props.isSignedIn ? <div className={'inline font-bold '}>
         <button onClick={() => googleAuthFirebase()}>Login via Google</button>
+        <button onClick={() => {
+          // Display popup
+          Onboarding(config);
+        }}>Onboarding Flow</button>
             </div> : <div/>}
       </div>
 

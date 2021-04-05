@@ -24,7 +24,7 @@ export default function Navbar({ isLanding, isSignedIn, setSignedIn }) {
                             items-center font-display bg-white z-50">
         <Link href="/" as={`/`}>
             <a className="font-semibold text-gray-700 text-xl">
-                Grapevine
+                BrunoBeyond
             </a>
         </Link>
         <div className="space-x-4 md:space-x-6">
