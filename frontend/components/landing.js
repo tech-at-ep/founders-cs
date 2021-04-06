@@ -7,6 +7,22 @@ import firebase from '../util/firebaseConfig'
 import Onboarding from 'react-onboarding-pro';
 import "react-onboarding-pro/build/index.css";
 
+let userInfo = {
+  FirstName: "",
+  LastName: "",
+  Concentration: "",
+  Year: "",
+  Status: 0,
+  Link1: "",
+  Link2: "",
+  Link3: "",
+  Photo: "",
+  Resume: "",
+  Question1: "",
+  Question2: "",
+  Question3: ""
+}
+
 export default function Landing(props) {
 
   /**
@@ -85,12 +101,171 @@ export default function Landing(props) {
     }
   }
 
+  function submitName() {
+    let input = document.getElementsByClassName("rop-input");
+    userInfo["FirstName"] = input[0].value;
+    userInfo["LastName"] = input[1].value;
+    userInfo["Concentration"] = input[2].value;
+    userInfo["Year"] = input[3].value;
+    
+  }
+
+  function submitStatus() {
+    let input = document.getElementsByClassName("rop-input");
+    if(input[0].checked === true) {
+      userInfo["Status"] = true;
+    } else {
+      userInfo["Status"] = false;
+    }
+  }
+
+  function submitLinks() {
+    let input = document.getElementsByClassName("rop-input");
+    userInfo["FirstLink"] = input[0].value;
+    userInfo["SecondLink"] = input[1].value;
+    userInfo["ThirdLink"] = input[2].value;
+    console.log(userInfo);  
+  }
+
+  function submitFiles() {
+
+  }
+
+  function submitQuestions() {
+
+  }
+
   // Config for the onboarding flow
 const config = {
   steps: [
     {
       title: 'Welcome to BrunoBeyond',
       description: 'Let\'s get you signed up.'
+    },
+    {
+      title: 'Who are you?',
+      description: 'Help the community identify you',
+      type: 'form', // Have an embedded form
+      fields: [
+        {
+          label: 'First Name',
+          name: 'first_name',
+          type: 'text',
+          placeholder: 'John',
+          validation: '[a-zA-Z]' // Regex expression to test for
+        },
+        {
+          label: 'Last Name',
+          name: 'last_name',
+          type: 'text',
+          placeholder: 'Doe',
+          validation: '[a-zA-Z]'
+        },
+        {
+          label: 'Concentration',
+          name: 'concentration',
+          type: 'text',
+          placeholder: 'Computer Science',
+          validation: '[a-zA-Z]'
+        },
+        {
+          label: 'Graduation Year',
+          name: 'year',
+          type: 'year',
+          placeholder: '2023',
+          validation: '(?:(?:20)[0-9][0-9])$'
+        },
+      ],
+      onSubmit: submitName // Function to be called when the form is submitted
+    },
+    {
+      title: 'Why are you using this website?',
+      description: 'Let us know what you\'re looking for',
+      type: 'form', // Have an embedded form
+      fields: [
+        {
+          label: 'I am currently searching for an opportunity',
+          name: 'status',
+          type: 'radio',
+          defaultChecked: false,
+          validation: '' // Regex expression to test for
+        },
+        {
+          label: 'I am looking to network',
+          name: 'status',
+          type: 'radio',
+          defaultChecked: false,
+          validation: '' // Regex expression to test for
+        }
+      ],
+      onSubmit: submitStatus // Function to be called when the form is submitted
+    },
+    {
+      title: 'Do you have any personal links?',
+      description: 'Drop your LinkedIn, Portfolio, etc.',
+      type: 'form', // Have an embedded form
+      fields: [
+        {
+          label: 'First Link',
+          name: 'first_link',
+          type: 'text',
+          placeholder: 'https://your-link-here.com',
+          validation: '' // Regex expression to test for
+        },
+        {
+          label: 'Second Link',
+          name: 'second_link',
+          type: 'text',
+          placeholder: 'https://your-link-here.com',
+          validation: ''
+        },
+        {
+          label: 'Third Link',
+          name: 'third_link',
+          type: 'text',
+          placeholder: 'https://your-link-here.com',
+          validation: ''
+        },
+      ],
+      onSubmit: submitLinks // Function to be called when the form is submitted
+    },
+    {
+      title: 'Upload your files',
+      description: 'A nice photo and your resume will do',
+      type: 'form', // Have an embedded form
+      fields: [
+        {
+          label: 'Photo',
+          name: 'photo',
+          type: 'file',
+          validation: '' // Regex expression to test for
+        },
+        {
+          label: 'Resume',
+          name: 'resume',
+          type: 'file',
+          validation: ''
+        }
+      ],
+      onSubmit: submitFiles // Function to be called when the form is submitted
+    },
+    {
+      title: 'More about you',
+      description: 'Tell us just a little more',
+      type: 'form', // Have an embedded form
+      fields: [
+        {
+          label: 'Photo',
+          name: 'photo',
+          type: 'text',
+          validation: '' // Regex expression to test for
+        }
+      ],
+      onSubmit: submitQuestions // Function to be called when the form is submitted
+    },
+    {
+      title: 'Thanks!',
+      description: 'You\'re all set!'
     },
   ],
   overlayClose: false // Should enable closing the popup when the overlay is clicked
